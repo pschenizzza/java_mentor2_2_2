@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+    <body>
+    <table border="1">
+        <caption th:text="${title}">CARS</caption>
+        <tr>
+            <th align="center" cellpadding="100" bgcolor="gray">№</th>
+            <th align="center" cellpadding="100" bgcolor="#d3d3d3">Model</th>
+            <th align="center" cellpadding="100" bgcolor="#d3d3d3">Horse Power</th>
+        </tr>
+        <tr th:each = "car : ${cars}">
+            <td align="center" bgcolor="#d3d3d3" th:text="${car.id}">default</td>
+            <td th:text="${car.model}">default</td>
+            <!--/*@thymesVar id="horsePower" type=""*/-->
+            <td align="center" th:text="${car.horsePower}">default</td>
+        </tr>
+    </table>
+    </body>
+</html>
