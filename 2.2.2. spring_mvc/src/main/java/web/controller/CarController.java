@@ -1,6 +1,7 @@
 package web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,14 +11,13 @@ import web.service.CarService;
 public class CarController {
 
     @GetMapping(value = "/cars")
-    public String printCar(@RequestParam (name = "locale", defaultValue = "ru") String locale, ModelMap model) {
+    public String printCar(@RequestParam(defaultValue = "5") int count, Model model) {
         CarService carService = new CarService();
         model.addAttribute("cars", carService.getAllCars());
-        if(locale.equals("en")) {
-            model.addAttribute("title", "CARS");
-        } else if(locale.equals("ru")) {
-            model.addAttribute("title", "МАШИНЫ");
-        }
+
+        if (count >= 5) {
+            model.addAttribute("cars", carService.getAllCars());
+        } else model.addAttribute("cars", carService.getAllCars().subList(0, count));
         return "car";
     }
 }
